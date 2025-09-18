@@ -52,6 +52,39 @@ This project demonstrates the use of **Puppet** to configure and deploy multiple
 
 ---
 
+---
+
+## 🛠 Puppet Setup Script
+
+A shell script is included to automate the installation and basic configuration of Puppet Master or Agent.
+
+### 🔧 How to Use
+
+1. Replace `<PRIVATE_IP_OF_MASTER>` with the actual private IP of the master node in the script.
+2. Run this on both master and slave nodes.
+
+### 📥 Download & Execute
+
+```bash
+wget <URL_TO_puppet_setup.sh>
+chmod +x puppet_setup.sh
+./puppet_setup.sh
+```
+
+> On the master node, don’t forget to run:
+> ```bash
+> sudo ufw allow 8140/tcp
+> sudo systemctl restart puppet-master.service
+> ```
+
+> Then sign the certificates:
+> ```bash
+> sudo puppet cert list
+> sudo puppet cert sign --all
+> ```
+
+---
+
 ## 🔧 Puppet Configuration
 
 ### ✅ site.pp (Main Manifest)
