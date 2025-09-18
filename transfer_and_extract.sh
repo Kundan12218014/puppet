@@ -31,15 +31,21 @@ fi
 echo "✅ Uploaded to destination."
 
 echo "Step 3: Extracting on destination..."
+
 ssh -i "$PEM_KEY_PATH" ubuntu@$DEST_IP << EOF
   set -e
+  echo "📦 Ensuring target directory exists..."
+  sudo mkdir -p "$DEST_DIR"
+
   echo "📦 Moving tar file to $DEST_DIR"
-  sudo mv /home/ubuntu/production.tar.gz $DEST_DIR
-  cd $DEST_DIR
+  sudo mv /home/ubuntu/production.tar.gz "$DEST_DIR"
+
+  cd "$DEST_DIR"
   echo "📂 Extracting contents..."
   sudo tar -xzvf production.tar.gz
   echo "✅ Extraction complete."
 EOF
+
 
 echo "🎉 Done! Puppet files transferred and extracted."
 
